@@ -17,4 +17,16 @@ public class Basket : MonoBehaviour
         mousWorldPos.y = transform.position.y;
         transform.position = mousWorldPos;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Fruit")
+        {
+            Destroy(collision.gameObject);
+        }
+        else if (collision.name == "BottomWall")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
