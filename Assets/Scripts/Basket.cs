@@ -4,29 +4,25 @@ using UnityEngine;
 
 public class Basket : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousWorldPos.y = transform.position.y;
-        transform.position = mousWorldPos;
+        Vector2 mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPoint.y = transform.position.y;
+        transform.position = mouseWorldPoint;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.tag == "Fruit")
+        Fruit fruit = other.GetComponent<Fruit>();
+        if (fruit != null)
         {
-            Destroy(collision.gameObject);
-        }
-        else if (collision.name == "BottomWall")
-        {
-            Destroy(collision.gameObject);
+            if (GameManager.Instance.gameState == GameState.GameStarted)
+            {
+                GameManager.Instance.AddScore(fruit.value);
+                
+            }
+            Destroy(other.gameObject);
         }
     }
 }
