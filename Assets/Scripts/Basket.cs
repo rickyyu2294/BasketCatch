@@ -19,6 +19,8 @@ public class Basket : MonoBehaviour
         {
             if (GameManager.Instance.gameState == GameState.GameStarted)
             {
+                fruit.PlayPop();
+
                 GameManager.Instance.AddScore(fruit.value);
                 
             }

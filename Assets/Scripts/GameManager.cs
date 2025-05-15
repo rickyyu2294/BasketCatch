@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public float gameTime = 0f;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         gameState = GameState.GameOver;
+        FruitController.Instance.StopSpawningFruit();
         clickToStartText.gameObject.SetActive(true);
     }
 
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Start Game");
         gameState = GameState.GameStarted;
+        FruitController.Instance.StartSpawningFruit();
         clickToStartText.gameObject.SetActive(false);
 
         ClearFruits();

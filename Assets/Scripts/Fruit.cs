@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
-    public int value;
+    public AudioClip pop;
+    public int value { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,11 @@ public class Fruit : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    internal void PlayPop()
+    {
+        AudioSource.PlayClipAtPoint(pop, transform.position);
     }
 
     private void HandleFruitOutOfBounds()
